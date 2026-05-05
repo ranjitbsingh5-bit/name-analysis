@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevents automatic phone number detection and underlining in mobile browsers -->
+    <meta name="format-detection" content="telephone=no">
     <title>Nexus Numerology | Professional Chaldean Analyst</title>
     <!-- Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,7 +33,7 @@
         /* A4 Page Layout - 4 Pages */
         .pdf-page {
             width: 210mm;
-            height: 297mm;
+            height: 297mm; /* Strictly A4 height */
             padding: 22mm;
             margin: 0 auto 30px auto !important;
             background: white;
@@ -48,24 +50,29 @@
             .pdf-page {
                 width: 95vw;
                 height: auto;
-                min-height: 100vh;
-                padding: 15px; /* Reduced padding on mobile to prevent text cutting */
-                margin-bottom: 20px !important;
+                min-height: 297mm;
+                padding: 15px; /* Reduced for mobile to prevent cut-offs */
             }
             h1.header-title {
-                letter-spacing: 0.1em !important; /* Tighten for mobile */
-                font-size: 1.5rem !important;
+                letter-spacing: 0.1em !important;
+                font-size: 1.4rem !important;
             }
         }
 
         .accent-border { border-top: 6px solid var(--brand-blue); }
         
+        /* Forces phone numbers to appear as regular text (no underline) */
+        a[href^="tel"], .no-detect {
+            text-decoration: none !important;
+            color: inherit !important;
+            border-bottom: none !important;
+        }
+
         .number-display {
             font-size: 48px;
             font-weight: 900;
             line-height: 1;
             display: inline-block;
-            vertical-align: middle;
         }
 
         .planet-badge {
@@ -75,8 +82,6 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             display: inline-block;
-            vertical-align: middle;
-            margin-left: 12px;
             line-height: 1;
         }
 
@@ -85,8 +90,6 @@
             font-size: 14px;
             font-weight: 800;
             text-transform: uppercase;
-            vertical-align: middle;
-            margin-left: 12px;
             line-height: 1;
         }
         
@@ -94,7 +97,7 @@
             width: 100%;
             margin-top: 25px;
             margin-bottom: 20px;
-            font-size: 18px; /* Increased */
+            font-size: 18px;
             font-weight: 800;
             line-height: 1.6;
             text-align: center;
@@ -137,10 +140,11 @@
             100% { transform: scale(1); }
         }
         
+        /* Pushes footer to bottom */
         .report-footer {
             border-top: 1px solid #f1f5f9;
             padding-top: 1.2rem;
-            margin-top: auto;
+            margin-top: auto; 
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -150,26 +154,26 @@
             letter-spacing: 0.1em;
             color: #94a3b8;
             flex-shrink: 0;
+            padding-bottom: 2mm;
         }
 
+        /* Updated to be bigger and rectangular */
         .bonus-badge {
             background: #1e3a8a;
             color: white;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            display: flex;
+            border-radius: 12px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-size: 10px;
-            font-weight: 800;
+            font-size: 13px; /* Slightly larger font */
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            line-height: 1.3;
-            padding: 10px;
-            box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.3);
-            border: 3px solid white;
+            letter-spacing: 0.08em;
+            line-height: 1.2;
+            padding: 14px 24px; /* Bigger padding for a larger box */
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2);
+            border: 2px solid white;
             transition: all 0.3s ease;
         }
     </style>
@@ -225,20 +229,22 @@
             </div>
             
             <div class="flex flex-col items-center border-t border-slate-100 pt-10">
-                <div class="relative w-full max-w-md flex flex-col md:flex-row items-center justify-center gap-6 mb-8">
-                    <div class="w-full max-w-sm bg-amber-50 border-2 border-amber-100 rounded-3xl p-6 text-center shadow-sm">
-                        <p class="text-[10px] font-black uppercase text-amber-600 tracking-[0.2em] mb-2">Exclusive Offer</p>
-                        <div class="flex items-center justify-center gap-4">
-                            <span class="text-slate-400 line-through text-xl">₹500</span>
-                            <span class="text-4xl font-black text-slate-900">₹100</span>
-                        </div>
-                        <p class="text-xs font-bold text-emerald-600 mt-2">Get your 4-page comprehensive report</p>
+                <!-- Price Box -->
+                <div class="w-full max-w-sm bg-amber-50 border-2 border-amber-100 rounded-3xl p-6 text-center shadow-sm mb-6">
+                    <p class="text-[10px] font-black uppercase text-amber-600 tracking-[0.2em] mb-2">Exclusive Offer</p>
+                    <div class="flex items-center justify-center gap-4">
+                        <span class="text-slate-400 line-through text-xl">₹500</span>
+                        <span class="text-4xl font-black text-slate-900">₹100</span>
                     </div>
-                    <div class="bonus-badge flex-shrink-0 md:absolute md:-right-16 md:top-1/2 md:-translate-y-1/2">
-                        mobile analysis report included
-                    </div>
+                    <p class="text-xs font-bold text-emerald-600 mt-2">Get your 4-page comprehensive report</p>
+                </div>
+                
+                <!-- Bonus Tag Positioned Between Price and Button - Blinking removed -->
+                <div class="bonus-badge mb-8">
+                    mobile analysis report included
                 </div>
 
+                <!-- Pay Button -->
                 <button onclick="initiatePaymentProcess()" id="generateBtn" class="w-full max-w-md bg-blue-600 hover:bg-blue-700 text-white font-black text-xl px-10 py-6 rounded-2xl transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-4 payment-pulse">
                     Get Report Now
                 </button>
@@ -265,7 +271,7 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="space-y-12">
                     <div class="space-y-8">
                         <h3 class="text-xs font-black text-blue-600 uppercase tracking-[0.3em] flex items-center gap-4">
                             <span class="h-px w-12 bg-blue-600"></span> Vibrational Identity
@@ -273,14 +279,14 @@
                         <div class="grid grid-cols-2 gap-12">
                             <div class="bg-slate-50/50 p-8 rounded-3xl border border-slate-100 text-center">
                                 <span class="text-[11px] text-slate-400 font-black uppercase tracking-widest block mb-4">King Number (Psychic)</span>
-                                <div class="inline-block">
+                                <div class="flex justify-center items-center gap-3">
                                     <span id="p1_KingNum" class="number-display text-slate-900"></span>
                                     <span id="p1_KingPlanet" class="planet-badge"></span>
                                 </div>
                             </div>
                             <div class="bg-slate-50/50 p-8 rounded-3xl border border-slate-100 text-center">
                                 <span class="text-[11px] text-slate-400 font-black uppercase tracking-widest block mb-4">Queen Number (Destiny)</span>
-                                <div class="inline-block">
+                                <div class="flex justify-center items-center gap-3">
                                     <span id="p1_QueenNum" class="number-display text-slate-900"></span>
                                     <span id="p1_QueenPlanet" class="planet-badge"></span>
                                 </div>
@@ -307,7 +313,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="report-footer"><span>Ranjit B singh</span><span>9953831912, 9953129931</span></div>
+                <div class="report-footer">
+                    <span>Ranjit B singh</span>
+                    <span class="no-detect">9953831912, 9953129931</span>
+                </div>
             </div>
 
             <!-- PAGE 2: FIRST NAME DYNAMICS -->
@@ -322,26 +331,29 @@
                     <div class="grid grid-cols-2 gap-12 mt-8">
                         <div class="bg-slate-50/50 p-10 rounded-3xl border border-slate-100 text-center">
                             <span class="text-[14px] text-slate-500 font-bold uppercase tracking-widest block mb-4">Compound Value</span>
-                            <div class="inline-block">
+                            <div class="flex justify-center items-center gap-3">
                                 <span id="p2_FirstComp" class="number-display text-slate-900"></span>
                                 <span id="p2_FirstQual" class="quality-note"></span>
                             </div>
                         </div>
                         <div class="bg-slate-50/50 p-10 rounded-3xl border border-blue-50 text-center">
                             <span class="text-[14px] text-slate-500 font-bold uppercase tracking-widest block mb-4">Root Value</span>
-                            <div class="inline-block">
+                            <div class="flex justify-center items-center gap-3">
                                 <span id="p2_FirstRoot" class="number-display text-blue-700"></span>
                                 <span id="p2_FirstPlanet" class="planet-badge"></span>
                             </div>
                         </div>
                     </div>
                     <div id="p2_FirstAlign" class="alignment-note"></div>
-                    <div class="bg-slate-50/30 p-12 rounded-3xl border border-slate-100 mt-10 shadow-sm">
+                    <div class="bg-slate-50/30 p-12 rounded-3xl border border-slate-100 mt-10 shadow-sm text-center">
                         <h4 class="text-blue-900 font-black uppercase text-lg mb-6 tracking-widest border-b border-blue-100 pb-2">Your First Name Prediction</h4>
                         <p id="p2_FirstInterp" class="italic text-slate-700 leading-relaxed text-2xl"></p>
                     </div>
                 </div>
-                <div class="report-footer"><span>Ranjit B singh</span><span>9953831912, 9953129931</span></div>
+                <div class="report-footer">
+                    <span>Ranjit B singh</span>
+                    <span class="no-detect">9953831912, 9953129931</span>
+                </div>
             </div>
 
             <!-- PAGE 3: FULL NAME SYNTHESIS -->
@@ -356,26 +368,29 @@
                     <div class="grid grid-cols-2 gap-12 mt-8">
                         <div class="bg-slate-50/50 p-10 rounded-3xl border border-slate-100 text-center">
                             <span class="text-[14px] text-slate-500 font-bold uppercase tracking-widest block mb-4">Total Compound</span>
-                            <div class="inline-block">
+                            <div class="flex justify-center items-center gap-3">
                                 <span id="p3_FullComp" class="number-display text-slate-900"></span>
                                 <span id="p3_FullQual" class="quality-note"></span>
                             </div>
                         </div>
                         <div class="bg-slate-50/50 p-10 rounded-3xl border border-blue-50 text-center">
                             <span class="text-[14px] text-slate-500 font-bold uppercase tracking-widest block mb-4">Total Root</span>
-                            <div class="inline-block">
+                            <div class="flex justify-center items-center gap-3">
                                 <span id="p3_FullRoot" class="number-display text-blue-700"></span>
                                 <span id="p3_FullPlanet" class="planet-badge"></span>
                             </div>
                         </div>
                     </div>
                     <div id="p3_FullAlign" class="alignment-note"></div>
-                    <div class="bg-slate-50/30 p-12 rounded-3xl border border-slate-100 mt-10 shadow-sm">
+                    <div class="bg-slate-50/30 p-12 rounded-3xl border border-slate-100 mt-10 shadow-sm text-center">
                         <h4 class="text-blue-900 font-black uppercase text-lg mb-6 tracking-widest border-b border-blue-100 pb-2">Your Full Name Prediction</h4>
                         <p id="p3_FullInterp" class="italic text-slate-700 leading-relaxed text-2xl"></p>
                     </div>
                 </div>
-                <div class="report-footer"><span>Ranjit B singh</span><span>9953831912, 9953129931</span></div>
+                <div class="report-footer">
+                    <span>Ranjit B singh</span>
+                    <span class="no-detect">9953831912, 9953129931</span>
+                </div>
             </div>
 
             <!-- PAGE 4: MOBILE & FINAL SYNTHESIS -->
@@ -391,18 +406,18 @@
                         <div class="bg-slate-50/50 p-12 rounded-3xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-8">
                             <div class="text-left flex-1">
                                 <span class="text-[14px] text-slate-400 font-black uppercase tracking-widest block mb-2">Mobile Number</span>
-                                <div id="p4_MobNum" class="text-4xl font-black text-slate-900 tracking-tight"></div>
+                                <div id="p4_MobNum" class="text-4xl font-black text-slate-900 tracking-tight no-detect"></div>
                                 <div id="p4_MobPairs" class="mt-4 text-base font-black text-rose-600"></div>
                             </div>
                             <div class="text-right flex-1">
-                                <span class="text-[14px] text-slate-400 font-black uppercase tracking-widest block mb-2 text-right">Numerical Total</span>
-                                <div class="inline-block">
+                                <span class="text-[11px] text-slate-400 font-black uppercase tracking-widest block mb-2 text-right">Numerical Total</span>
+                                <div class="flex justify-end items-center gap-3">
                                     <span id="p4_MobTotal" class="number-display text-blue-700"></span>
                                     <span id="p4_MobBadge" class="quality-note"></span>
                                 </div>
                             </div>
                         </div>
-                        <div id="p4_MobRec" class="p-10 rounded-3xl text-xl leading-relaxed shadow-sm"></div>
+                        <div id="p4_MobRec" class="p-10 rounded-3xl text-xl leading-relaxed shadow-sm text-center"></div>
                     </div>
 
                     <div id="p4_SummaryBox" class="hidden">
@@ -419,10 +434,13 @@
 
                     <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-100 mt-6 text-center mx-auto max-w-[85%]">
                         <p class="text-[12px] font-bold text-slate-400 mb-2 tracking-widest uppercase text-center">For personalized corrections and deep consultations:</p>
-                        <p class="text-2xl font-black text-blue-900 tracking-tight text-center">+91 9953831912 / 9953129931</p>
+                        <p class="text-2xl font-black text-blue-900 tracking-tight text-center no-detect">+91 9953831912 / 9953129931</p>
                     </div>
                 </div>
-                <div class="report-footer"><span>Ranjit B singh</span><span>9953831912, 9953129931</span></div>
+                <div class="report-footer">
+                    <span>Ranjit B singh</span>
+                    <span class="no-detect">9953831912, 9953129931</span>
+                </div>
             </div>
 
             <div class="flex flex-col sm:flex-row justify-center items-center gap-6 no-print pt-10">
@@ -441,7 +459,7 @@
 
         const CHALDEAN_MAP = {'A':1,'I':1,'J':1,'Q':1,'Y':1,'B':2,'K':2,'R':2,'C':3,'G':3,'L':3,'S':3,'D':4,'M':4,'T':4,'E':5,'H':5,'N':5,'X':5,'U':6,'V':6,'W':6,'O':7,'Z':7,'F':8,'P':8};
         const PLANET_MAP = {1:"Sun",2:"Moon",3:"Jupiter",4:"Rahu",5:"Mercury",6:"Venus",7:"Ketu",8:"Shani",9:"Mars"};
-        const INTERPRETATIONS = {1:"Leadership, authority, name and fame.", 2:"Intuitive, soft hearted, emotional.", 3:"Expansion, knowledge, luck booster.", 4:"Rigid behavior, dryness, unexpected losses.", 5:"Good communication, business skills.", 6:"Attractive personality, luxury, comfort.", 7:"Detachment, Isolation, moods.", 8:"Slow and sluggish, struggle.", 9:"Aggressive, risk taking capability."};
+        const INTERPRETATIONS = {1:"Leadership, authority, name and fame.", 2:"Intuitive, soft hearted, emotional.", 3:"Expansion, knowledge, luck booster.", 4:"Rigid behavior, dryness, unexpected losses.", 5:"Good communication, business skills.", 6:"Attractive personality, luxury, comfort.", 7:"Detachment, Isolation, moods.", 8:"Slow and sluggish, struggle.", 9:"Aggressive, short-tempered, risk taking capability."};
         const COMPATIBILITY_CHART = {1:{lucky:[1,2,3,5,9],unlucky:[8],neutral:[4,6,7]},2:{lucky:[1,3,5],unlucky:[4,8,9],neutral:[2,6,7]},3:{lucky:[1,2,3,5],unlucky:[6],neutral:[4,7,8,9]},4:{lucky:[1,6,7],unlucky:[2,4,8,9],neutral:[3,5]},5:{lucky:[1,2,3,5,6],unlucky:[],neutral:[4,7,8,9]},6:{lucky:[4,5,6,7],unlucky:[3],neutral:[1,2,8,9]},7:{lucky:[1,4,5,6],unlucky:[],neutral:[2,3,7,8,9]},8:{lucky:[3,5,6],unlucky:[1,2,4,8],neutral:[7,9]},9:{lucky:[1,3,5],unlucky:[2,4],neutral:[6,7,8,9]}};
         const COMPOUND_QUALITY_MAP = {1:'dont',2:'dont',3:'use',4:'dont',5:'use',6:'use',7:'dont',8:'dont',9:'dont',10:'use',11:'dont',12:'use',13:'dont',14:'use',15:'use',16:'dont',17:'dont',18:'dont',19:'use',20:'dont',21:'use',22:'dont',23:'use',24:'use',25:'dont',26:'dont',27:'use',28:'dont',29:'dont',30:'use',31:'dont',32:'use',33:'use',34:'dont',35:'dont',36:'dont',37:'use',38:'dont',39:'use',40:'dont',41:'use',42:'use',43:'dont',44:'dont',45:'use',46:'use',47:'dont',48:'dont',49:'dont',50:'use',51:'use',52:'dont',53:'dont',54:'dont',55:'use',56:'dont',57:'dont',58:'dont',59:'use',60:'use',61:'dont',62:'dont',63:'dont',64:'use',65:'dont',66:'use',67:'dont',68:'dont',69:'use',70:'dont',71:'dont',72:'use',73:'use',74:'dont',75:'dont',76:'dont',77:'use',78:'ok',79:'dont',80:'dont',81:'use',82:'dont',83:'dont',84:'dont',85:'dont',86:'dont',87:'dont',88:'dont',89:'dont',90:'dont',91:'use',92:'dont',93:'ok',94:'dont',95:'dont',96:'use',97:'dont',98:'dont',99:'use',100:'dont'};
         const MALEFIC_MOBILE_PAIRS = ['41','61','81','62','72','82','43','14','34','44','54','64','84','45','16','26','46','76','86','27','67','18','28','48','68'];
@@ -537,7 +555,7 @@
                 else { el.innerText = "Unfavorable"; el.classList.add('comp-bad-text'); }
             };
 
-            // Page 2 - First Name
+            // Page 2
             document.getElementById('p2_FirstComp').innerText = firstResults.compound;
             setQ('p2_FirstQual', firstResults.compound);
             document.getElementById('p2_FirstRoot').innerText = firstResults.root;
@@ -545,7 +563,7 @@
             document.getElementById('p2_FirstInterp').innerText = INTERPRETATIONS[firstResults.root];
             setUI('p2_FirstAlign', firstResults.root, "First Name is");
 
-            // Page 3 - Full Name Synthesis
+            // Page 3 (Full Name)
             document.getElementById('p3_FullComp').innerText = fullResults.compound;
             setQ('p3_FullQual', fullResults.compound);
             document.getElementById('p3_FullRoot').innerText = fullResults.root;
@@ -553,7 +571,7 @@
             document.getElementById('p3_FullInterp').innerText = INTERPRETATIONS[fullResults.root];
             setUI('p3_FullAlign', fullResults.root, "Full Name is");
 
-            // Page 4 - Mobile Restore
+            // Page 4 (Mobile)
             document.getElementById('p4_MobNum').innerText = phone;
             document.getElementById('p4_MobTotal').innerText = mobResults.root;
             let cleanedPhone = phone.replace(/0/g, '');
@@ -618,6 +636,8 @@
                     const pdfWidth = 210, contentWidth = 190; 
                     const imgHeight = (canvas.height * contentWidth) / canvas.width;
                     const xOffset = (pdfWidth - contentWidth) / 2;
+                    
+                    // Fixed top margin to prevent bottom cutting
                     pdf.addImage(imgData, 'JPEG', xOffset, 5, contentWidth, imgHeight);
                 };
                 await capture('pdfPage1', false); 
