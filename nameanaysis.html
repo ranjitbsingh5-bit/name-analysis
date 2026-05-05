@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Numerology | Professional Chaldean Analyst</title>
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-blue: #1e3a8a;
+            --brand-accent: #2563eb;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            scroll-behavior: smooth;
+        }
+        .serif { font-family: 'Libre Baskerville', serif; }
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        
+        /* A4 Page Layout for Report */
+        .pdf-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 18mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 215mm) {
+            .pdf-page {
+                width: 95vw;
+                min-height: auto;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .accent-border { border-top: 6px solid var(--brand-blue); }
+        
+        .planet-badge {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #dbeafe;
+            padding: 2px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .alignment-note {
+            display: block;
+            margin-top: 12px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+        }
+        .correction-callout {
+            font-weight: 900;
+            text-decoration: underline;
+            display: block;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+        .quality-note {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        
+        /* Status Themes */
+        .aligned { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+        .not-aligned { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .neutral-aligned { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+        .comp-good { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .comp-bad { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .comp-neutral { background: #f3f4f6; color: #374151; border: 1px solid #e5e7eb; }
+
+        .final-note-box {
+            margin-top: 30px;
+            padding: 30px;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+        }
+
+        .payment-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .report-footer {
+            border-top: 2px solid #f1f5f9;
+            padding-top: 1.5rem;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white pt-12 pb-24 px-4 no-print relative overflow-hidden text-center">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
+            </svg>
+        </div>
+        <div class="max-w-5xl mx-auto relative z-10">
+            <h1 class="text-3xl md:text-5xl font-extrabold serif uppercase tracking-widest mb-4">Nexus Numerrology</h1>
+            <p class="text-lg md:text-xl font-light text-blue-100 max-w-2xl mx-auto leading-relaxed">
+                Professional Chaldean Analysis: Align your identity with your destiny.
+            </p>
+        </div>
+    </section>
+
+    <div class="max-w-4xl mx-auto -mt-12 px-4 mb-20 relative z-20">
+        
+        <!-- Input Section -->
+        <div id="analyzer" class="card rounded-3xl p-8 md:p-12 mb-12 shadow-2xl border-0">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-black text-slate-800 tracking-tight">Generate Your Report</h2>
+                <p class="text-slate-500 text-sm mt-2">Ancient Chaldean Vibrational Assessment</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                <div class="md:col-span-2 space-y-2">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Full Legal Name</label>
+                    <input 
+                        type="text" 
+                        id="nameInput" 
+                        placeholder="Enter full name" 
+                        class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all uppercase font-bold"
+                    >
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Mobile Number</label>
+                    <input 
+                        type="tel" 
+                        id="phoneInput" 
+                        placeholder="10 digit number" 
+                        maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                        class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-bold"
+                    >
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Date of Birth</label>
+                    <input 
+                        type="text" 
+                        id="dobInput" 
+                        placeholder="DD/MM/YYYY" 
+                        maxlength="10"
+                        oninput="formatDateInput(this)"
+                        class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-bold"
+                    >
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center border-t border-slate-100 pt-10">
+                <!-- Price Box -->
+                <div class="w-full max-w-sm bg-amber-50 border-2 border-amber-100 rounded-3xl p-6 text-center mb-8 shadow-sm">
+                    <p class="text-[10px] font-black uppercase text-amber-600 tracking-[0.2em] mb-2">Exclusive Offer</p>
+                    <div class="flex items-center justify-center gap-4">
+                        <span class="text-slate-400 line-through text-xl">₹500</span>
+                        <span class="text-4xl font-black text-slate-900">₹100</span>
+                    </div>
+                    <p class="text-xs font-bold text-emerald-600 mt-2">Get your 3-page comprehensive report</p>
+                </div>
+
+                <!-- Pay Button -->
+                <button 
+                    onclick="handlePaymentAndReveal()" 
+                    id="generateBtn"
+                    class="w-full max-w-md bg-blue-600 hover:bg-blue-700 text-white font-black text-xl px-10 py-6 rounded-2xl transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-4 payment-pulse"
+                >
+                    Pay & Generate 3-Page Report
+                </button>
+                <p class="text-[10px] text-slate-400 mt-6 font-bold uppercase tracking-widest">Secured Checkout via Gateway</p>
+            </div>
+        </div>
+
+        <!-- REPORT DISPLAY AREA -->
+        <div id="reportContainer" class="hidden space-y-12 pb-20 no-print">
+            
+            <!-- PAGE 1: BIRTH VIBRATION -->
+            <div id="pdfPage1" class="pdf-page accent-border">
+                <div class="flex-grow">
+                    <div class="text-center border-b-2 border-slate-100 pb-10 mb-10">
+                        <h1 class="text-3xl font-black text-blue-900 tracking-[0.3em] serif uppercase">Nexus Numerrology</h1>
+                    </div>
+
+                    <div class="flex justify-between items-start mb-12">
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Client Identity</p>
+                            <h2 id="p1_Name" class="serif text-3xl text-slate-950 font-bold uppercase mt-1"></h2>
+                            <p id="p1_DOB" class="text-blue-600 font-bold text-sm mt-1"></p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Report Date</p>
+                            <p id="p1_Date" class="text-sm text-slate-900 font-bold mt-1"></p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-12">
+                        <div class="space-y-6">
+                            <h3 class="text-xs font-black text-blue-600 uppercase tracking-[0.3em] flex items-center gap-4">
+                                <span class="h-px w-12 bg-blue-600"></span>
+                                Vibrational Birth Identity
+                            </h3>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                                    <span class="text-[10px] text-slate-500 font-black uppercase tracking-widest">King Number (Psychic)</span>
+                                    <div class="flex items-center justify-between mt-4">
+                                        <div id="p1_KingNum" class="text-6xl font-black text-slate-900"></div>
+                                        <span id="p1_KingPlanet" class="planet-badge"></span>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                                    <span class="text-[10px] text-slate-500 font-black uppercase tracking-widest">Queen Number (Destiny)</span>
+                                    <div class="flex items-center justify-between mt-4">
+                                        <div id="p1_QueenNum" class="text-6xl font-black text-slate-900"></div>
+                                        <span id="p1_QueenPlanet" class="planet-badge"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-8">
+                            <h3 class="text-xs font-black text-blue-600 uppercase tracking-[0.3em] flex items-center gap-4">
+                                <span class="h-px w-12 bg-blue-600"></span>
+                                Planetary Compatibility Chart
+                            </h3>
+                            <div class="bg-white border-2 border-slate-50 rounded-3xl p-8 space-y-6">
+                                <div class="flex items-center gap-8">
+                                    <div class="w-32 text-[11px] font-black text-emerald-600 uppercase tracking-widest">Benefic</div>
+                                    <div id="p1_Lucky" class="flex flex-wrap gap-5"></div>
+                                </div>
+                                <div class="flex items-center gap-8 border-y border-slate-50 py-6">
+                                    <div class="w-32 text-[11px] font-black text-blue-500 uppercase tracking-widest">Neutral</div>
+                                    <div id="p1_Neutral" class="flex flex-wrap gap-5"></div>
+                                </div>
+                                <div class="flex items-center gap-8">
+                                    <div class="w-32 text-[11px] font-black text-rose-500 uppercase tracking-widest">Malefic</div>
+                                    <div id="p1_Unlucky" class="flex flex-wrap gap-5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-footer">
+                    <span>Ranjit B singh</span>
+                    <span>9953831912, 9953129931</span>
+                </div>
+            </div>
+
+            <!-- PAGE 2: NAME ANALYSIS -->
+            <div id="pdfPage2" class="pdf-page accent-border">
+                <div class="flex-grow">
+                    <div class="text-center border-b-2 border-slate-100 pb-10 mb-10">
+                        <h1 class="text-3xl font-black text-blue-900 tracking-[0.3em] serif uppercase">Nexus Numerrology</h1>
+                    </div>
+
+                    <div class="space-y-12">
+                        <!-- First Name -->
+                        <div class="space-y-6">
+                            <h3 class="text-xs font-black text-blue-600 uppercase tracking-[0.3em]">First Name Analysis</h3>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="bg-slate-50 p-6 rounded-2xl">
+                                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Compound Value</span>
+                                    <div class="flex items-center mt-2">
+                                        <div id="p2_FirstComp" class="text-4xl font-black text-slate-900"></div>
+                                        <span id="p2_FirstQual" class="quality-note ml-4"></span>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-6 rounded-2xl border-2 border-blue-50">
+                                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Root Value</span>
+                                    <div class="flex items-center mt-2">
+                                        <div id="p2_FirstRoot" class="text-4xl font-black text-blue-700"></div>
+                                        <span id="p2_FirstPlanet" class="planet-badge ml-4"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="p2_FirstAlign" class="alignment-note"></div>
+                            <div class="bg-blue-50/30 p-8 rounded-2xl border border-blue-100">
+                                <p id="p2_FirstInterp" class="italic text-slate-700 leading-relaxed text-lg"></p>
+                            </div>
+                        </div>
+
+                        <!-- Full Name -->
+                        <div class="space-y-6 pt-6">
+                            <h3 class="text-xs font-black text-blue-600 uppercase tracking-[0.3em]">Full Name Synthesis</h3>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="bg-slate-50 p-6 rounded-2xl">
+                                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Total Compound</span>
+                                    <div class="flex items-center mt-2">
+                                        <div id="p2_FullComp" class="text-4xl font-black text-slate-900"></div>
+                                        <span id="p2_FullQual" class="quality-note ml-4"></span>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-6 rounded-2xl border-2 border-blue-50">
+                                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Total Root</span>
+                                    <div class="flex items-center mt-2">
+                                        <div id="p2_FullRoot" class="text-4xl font-black text-blue-700"></div>
+                                        <span id="p2_FullPlanet" class="planet-badge ml-4"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="p2_FullAlign" class="alignment-note"></div>
+                            <div class="bg-blue-50/30 p-8 rounded-2xl border border-blue-100">
+                                <p id="p2_FullInterp" class="italic text-slate-700 leading-relaxed text-lg"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-footer">
+                    <span>Ranjit B singh</span>
+                    <span>9953831912, 9953129931</span>
+                </div>
+            </div>
+
+            <!-- PAGE 3: MOBILE & CONCLUSION -->
+            <div id="pdfPage3" class="pdf-page accent-border">
+                <div class="flex-grow">
+                    <div class="text-center border-b-2 border-slate-100 pb-10 mb-10">
+                        <h1 class="text-3xl font-black text-blue-900 tracking-[0.3em] serif uppercase">Nexus Numerrology</h1>
+                    </div>
+
+                    <div class="space-y-12">
+                        <!-- Mobile Analysis -->
+                        <div class="space-y-6">
+                            <h3 class="text-xs font-black text-amber-600 uppercase tracking-[0.3em]">Mobile Vibration Analysis</h3>
+                            <div class="bg-slate-50 p-10 rounded-3xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center">
+                                <div>
+                                    <span class="text-[10px] text-slate-500 font-black uppercase tracking-widest">Mobile Number</span>
+                                    <div id="p3_MobNum" class="text-3xl font-black text-slate-900 mt-2"></div>
+                                    <!-- Detecting Malefic Pairs -->
+                                    <div id="p3_MobPairs" class="mt-4 text-base font-bold text-rose-600 space-x-2"></div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] text-slate-500 font-black uppercase tracking-widest">Numerical Total</span>
+                                    <div class="flex items-center gap-4 mt-2">
+                                        <div id="p3_MobTotal" class="text-6xl font-black text-blue-700"></div>
+                                        <div id="p3_MobBadge" class="quality-note px-4 py-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="p3_MobRec" class="p-8 rounded-2xl text-lg leading-relaxed"></div>
+                        </div>
+
+                        <!-- Final Synthesis -->
+                        <div id="p3_SummaryBox" class="hidden">
+                            <div class="final-note-box shadow-sm">
+                                <h4 class="text-xl font-black uppercase tracking-[0.2em] mb-4 text-blue-800">
+                                    Final Synthesis - <span id="finalNoteClientName"></span>
+                                </h4>
+                                <p class="text-lg font-medium text-slate-900 leading-relaxed">
+                                    Based on our ancient Chaldean vibrational assessment, your current configurations show **Malefic imbalances**. This misalignment often creates invisible barriers in career growth, health stability, and relationship harmony.
+                                </p>
+                                <p class="text-sm font-bold text-blue-700 mt-6 uppercase tracking-widest italic">Professional spell-correction is highly recommended.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-10 rounded-3xl border border-slate-100 mt-20 text-center">
+                            <p class="text-sm font-bold text-slate-800 mb-2 tracking-wide">For personalized corrections and deep consultations:</p>
+                            <p class="text-2xl font-black text-blue-900 tracking-tight">+91 9953831912 / 9953129931</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-footer">
+                    <span>Ranjit B singh</span>
+                    <span>9953831912, 9953129931</span>
+                </div>
+            </div>
+
+            <!-- Download Button -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 no-print pt-10">
+                <button 
+                    onclick="downloadPDF()" 
+                    id="downloadBtn"
+                    class="w-full sm:w-auto flex items-center justify-center gap-4 bg-slate-900 hover:bg-black text-white font-black px-16 py-6 rounded-2xl transition-all shadow-2xl active:scale-95 text-lg"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Download Full 3-Page Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PAYMENT_LINK = "https://buy.stripe.com/your-placeholder-link";
+
+        const CHALDEAN_MAP = {
+            'A': 1, 'I': 1, 'J': 1, 'Q': 1, 'Y': 1, 'B': 2, 'K': 2, 'R': 2, 'C': 3, 'G': 3, 'L': 3, 'S': 3,
+            'D': 4, 'M': 4, 'T': 4, 'E': 5, 'H': 5, 'N': 5, 'X': 5, 'U': 6, 'V': 6, 'W': 6, 'O': 7, 'Z': 7,
+            'F': 8, 'P': 8
+        };
+
+        const PLANET_MAP = { 1: "Sun", 2: "Moon", 3: "Jupiter", 4: "Rahu", 5: "Mercury", 6: "Venus", 7: "Ketu", 8: "Shani", 9: "Mars" };
+
+        const INTERPRETATIONS = {
+            1: "Leadership, authority, health booster, name and fame. Due to workaholic behavior relations are ignored.",
+            2: "Intuitive, soft hearted, very emotional and sensitive, Mood swings.",
+            3: "Expansion, knowledge, immunity, luck booster, likes to give and take knowledge. Loves to spend time with knowledgeable person.",
+            4: "Like to live on own terms, rigid behavior, slow progress, dryness in life, unexpected losses, litigations.",
+            5: "Good communication, business skills, resourceful, multi-talented.",
+            6: "Attractive personality, luxury, comfort, family orientated (if 6 is unlucky for you please avoid).",
+            7: "Termination, heart break, detachment, Isolation, depression, unpredictable moods.",
+            8: "Slow and sluggish, disturbed life, extra burden in relationship and work life, struggle.",
+            9: "Aggressive, short-tempered, impulsive, risk taking capability, egoistic, emotional from inside aggressive from outside, brave."
+        };
+
+        const COMPATIBILITY_CHART = {
+            1: { lucky: [1, 2, 3, 5, 9], unlucky: [8], neutral: [4, 6, 7] },
+            2: { lucky: [1, 3, 5], unlucky: [4, 8, 9], neutral: [2, 6, 7] },
+            3: { lucky: [1, 2, 3, 5], unlucky: [6], neutral: [4, 7, 8, 9] },
+            4: { lucky: [1, 6, 7], unlucky: [2, 4, 8, 9], neutral: [3, 5] },
+            5: { lucky: [1, 2, 3, 5, 6], unlucky: [], neutral: [4, 7, 8, 9] },
+            6: { lucky: [4, 5, 6, 7], unlucky: [3], neutral: [1, 2, 8, 9] },
+            7: { lucky: [1, 4, 5, 6], unlucky: [], neutral: [2, 3, 7, 8, 9] },
+            8: { lucky: [3, 5, 6], unlucky: [1, 2, 4, 8], neutral: [7, 9] },
+            9: { lucky: [1, 3, 5], unlucky: [2, 4], neutral: [6, 7, 8, 9] }
+        };
+
+        const COMPOUND_QUALITY_MAP = {
+            1:'dont', 2:'dont', 3:'use', 4:'dont', 5:'use', 6:'use', 7:'dont', 8:'dont', 9:'dont', 10:'use',
+            11:'dont', 12:'use', 13:'dont', 14:'use', 15:'use', 16:'dont', 17:'dont', 18:'dont', 19:'use', 20:'dont',
+            21:'use', 22:'dont', 23:'use', 24:'use', 25:'dont', 26:'dont', 27:'use', 28:'dont', 29:'dont', 30:'use',
+            31:'dont', 32:'use', 33:'use', 34:'dont', 35:'dont', 36:'dont', 37:'use', 38:'dont', 39:'use', 40:'dont',
+            41:'use', 42:'use', 43:'dont', 44:'dont', 45:'use', 46:'use', 47:'dont', 48:'dont', 49:'dont', 50:'use',
+            51:'use', 52:'dont', 53:'dont', 54:'dont', 55:'use', 56:'dont', 57:'dont', 58:'dont', 59:'use', 60:'use',
+            61:'dont', 62:'dont', 63:'dont', 64:'use', 65:'dont', 66:'use', 67:'dont', 68:'dont', 69:'use', 70:'dont',
+            71:'dont', 72:'use', 73:'use', 74:'dont', 75:'dont', 76:'dont', 77:'use', 78:'ok', 79:'dont', 80:'dont',
+            81:'use', 82:'dont', 83:'dont', 84:'dont', 85:'dont', 86:'dont', 87:'dont', 88:'dont', 89:'dont', 90:'dont',
+            91:'use', 92:'dont', 93:'ok', 94:'dont', 95:'dont', 96:'use', 97:'dont', 98:'dont', 99:'use', 100:'dont'
+        };
+
+        const MALEFIC_MOBILE_PAIRS = ['41', '61', '81', '62', '72', '82', '43', '14', '34', '44', '54', '64', '84', '45', '16', '26', '46', '76', '86', '27', '67', '18', '28', '48', '68'];
+
+        function reduceNum(n) {
+            let res = n;
+            while (res > 9) res = String(res).split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            return res;
+        }
+
+        // Enforce strict DD/MM/YYYY
+        function formatDateInput(input) {
+            let v = input.value.replace(/\D/g, '').slice(0, 8);
+            if (v.length >= 5) {
+                v = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4);
+            } else if (v.length >= 3) {
+                v = v.slice(0, 2) + '/' + v.slice(2);
+            }
+            input.value = v;
+        }
+
+        function calculateValue(str) {
+            let compound = 0;
+            const upper = str.toUpperCase();
+            for (let char of upper) if (CHALDEAN_MAP[char]) compound += CHALDEAN_MAP[char];
+            return { compound, root: reduceNum(compound) };
+        }
+
+        function calculateMobileValue(phone) {
+            const digits = phone.replace(/[^0-9]/g, '').split('');
+            const compound = digits.reduce((sum, d) => sum + parseInt(d), 0);
+            return { compound, root: reduceNum(compound) };
+        }
+
+        function getFinalStatus(num, king, queen) {
+            const kData = COMPATIBILITY_CHART[king];
+            const qData = COMPATIBILITY_CHART[queen];
+            const getStatus = (data, n) => {
+                if (data.unlucky.includes(n)) return 0;
+                if (data.neutral.includes(n)) return 1;
+                if (data.lucky.includes(n)) return 2;
+                return 1;
+            };
+            const kStatus = getStatus(kData, num);
+            const qStatus = getStatus(qData, num);
+            if (kStatus === 0 || qStatus === 0) return 'Unlucky';
+            if (kStatus === 1 || qStatus === 1) return 'Neutral';
+            return 'Lucky';
+        }
+
+        function handlePaymentAndReveal() {
+            const name = document.getElementById('nameInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
+            const dob = document.getElementById('dobInput').value;
+            if (!name || !phone || dob.length < 10) {
+                alert("Please complete Name, Mobile, and Date (DD/MM/YYYY).");
+                return;
+            }
+            window.open(PAYMENT_LINK, '_blank');
+            analyzeName();
+        }
+
+        function setAlignmentUI(elId, root, prefix) {
+            const el = document.getElementById(elId);
+            el.classList.remove('aligned', 'not-aligned', 'neutral-aligned');
+            if ([1, 3, 5, 6].includes(root)) {
+                el.innerText = `${prefix} Benefic and aligned.`;
+                el.classList.add('aligned');
+            } else if ([4, 7, 8].includes(root)) {
+                el.innerHTML = `${prefix} Malefic and not aligned. <span class="correction-callout">Correction Recommended.</span>`;
+                el.classList.add('not-aligned');
+            } else {
+                el.innerText = `${prefix} Neutral.`;
+                el.classList.add('neutral-aligned');
+            }
+        }
+
+        function setQualityUI(elId, compound) {
+            const el = document.getElementById(elId);
+            const q = COMPOUND_QUALITY_MAP[compound] || 'dont';
+            el.classList.remove('comp-good', 'comp-bad', 'comp-neutral');
+            if (q === 'use') { el.innerText = "Excellent"; el.classList.add('comp-good'); }
+            else if (q === 'ok') { el.innerText = "Acceptable"; el.classList.add('comp-neutral'); }
+            else { el.innerText = "Unfavorable"; el.classList.add('comp-bad'); }
+        }
+
+        function analyzeName() {
+            const name = document.getElementById('nameInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
+            const dobInputString = document.getElementById('dobInput').value;
+            
+            const dobParts = dobInputString.split('/');
+            const day = parseInt(dobParts[0]);
+            const king = reduceNum(day);
+            const fullDigitsSum = dobInputString.replace(/\//g, '').split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            const queen = reduceNum(fullDigitsSum);
+
+            const firstResults = calculateValue(name.split(/\s+/)[0]);
+            const fullResults = calculateValue(name);
+            const mobResults = calculateMobileValue(phone);
+
+            const sysDate = new Date().toLocaleDateString('en-US', { dateStyle: 'medium' });
+
+            // PAGE 1
+            document.getElementById('p1_Name').innerText = name.toUpperCase();
+            document.getElementById('p1_DOB').innerText = "Birth Vibration: " + dobInputString;
+            document.getElementById('p1_Date').innerText = sysDate;
+            document.getElementById('p1_KingNum').innerText = king;
+            document.getElementById('p1_KingPlanet').innerText = PLANET_MAP[king];
+            document.getElementById('p1_QueenNum').innerText = queen;
+            document.getElementById('p1_QueenPlanet').innerText = PLANET_MAP[queen];
+
+            let luckyArr = [], neutralArr = [], unluckyArr = [];
+            for (let i = 1; i <= 9; i++) {
+                const s = getFinalStatus(i, king, queen);
+                if (s === 'Lucky') luckyArr.push(i);
+                else if (s === 'Neutral') neutralArr.push(i);
+                else unluckyArr.push(i);
+            }
+
+            const renderL = (id, arr, col) => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = arr.map(n => `<span class="text-3xl font-black ${col}">${n}</span>`).join('');
+            }
+            renderL('p1_Lucky', luckyArr, 'text-emerald-600');
+            renderL('p1_Neutral', neutralArr, 'text-blue-500');
+            renderL('p1_Unlucky', unluckyArr, 'text-rose-500');
+
+            // PAGE 2
+            document.getElementById('p2_FirstComp').innerText = firstResults.compound;
+            setQualityUI('p2_FirstQual', firstResults.compound);
+            document.getElementById('p2_FirstRoot').innerText = firstResults.root;
+            document.getElementById('p2_FirstPlanet').innerText = PLANET_MAP[firstResults.root];
+            document.getElementById('p2_FirstInterp').innerText = INTERPRETATIONS[firstResults.root];
+            setAlignmentUI('p2_FirstAlign', firstResults.root, "First Name is");
+
+            document.getElementById('p2_FullComp').innerText = fullResults.compound;
+            setQualityUI('p2_FullQual', fullResults.compound);
+            document.getElementById('p2_FullRoot').innerText = fullResults.root;
+            document.getElementById('p2_FullPlanet').innerText = PLANET_MAP[fullResults.root];
+            document.getElementById('p2_FullInterp').innerText = INTERPRETATIONS[fullResults.root];
+            setAlignmentUI('p2_FullAlign', fullResults.root, "Full Name is");
+
+            // PAGE 3
+            document.getElementById('p3_MobNum').innerText = phone;
+            document.getElementById('p3_MobTotal').innerText = mobResults.root;
+            
+            let foundPairs = [];
+            for(let i=0; i < phone.length - 1; i++) {
+                let pair = phone.substring(i, i+2);
+                if(MALEFIC_MOBILE_PAIRS.includes(pair) && !foundPairs.includes(pair)) {
+                    foundPairs.push(pair);
+                }
+            }
+            const pairsEl = document.getElementById('p3_MobPairs');
+            if(foundPairs.length > 0) {
+                pairsEl.innerHTML = "Malefic Combinations Found: " + foundPairs.join(', ');
+                pairsEl.classList.remove('hidden');
+            } else {
+                pairsEl.classList.add('hidden');
+            }
+
+            const mobS = getFinalStatus(mobResults.root, king, queen);
+            const mobBadge = document.getElementById('p3_MobBadge');
+            mobBadge.innerText = mobS;
+            mobBadge.classList.remove('comp-good', 'comp-bad', 'comp-neutral');
+
+            const beneficSet = [1, 3, 5, 6];
+            const luckyBenefics = luckyArr.filter(n => beneficSet.includes(n));
+            const recEl = document.getElementById('p3_MobRec');
+            
+            if (mobS === 'Lucky' && foundPairs.length === 0) {
+                mobBadge.classList.add('comp-good');
+                recEl.innerHTML = "<span class='text-emerald-700 font-bold'>Your mobile vibration is currently favorable and supportive.</span>";
+                recEl.className = "p-8 rounded-2xl text-lg bg-emerald-50 border border-emerald-100";
+            } else {
+                mobBadge.classList.add(mobS === 'Unlucky' || foundPairs.length > 0 ? 'comp-bad' : 'comp-neutral');
+                recEl.innerHTML = `<strong>Recommendation:</strong> Your mobile configuration has ${foundPairs.length > 0 ? 'malefic pairs' : mobS.toLowerCase() + ' vibrations'}. Transition to a number totaling to: <span class="text-blue-700 font-black">${luckyBenefics.join(', ')}</span>.`;
+                recEl.className = "p-8 rounded-2xl text-lg bg-slate-50 border border-slate-100";
+            }
+
+            const maleficSet = [4, 7, 8];
+            if (maleficSet.includes(firstResults.root) || maleficSet.includes(fullResults.root) || maleficSet.includes(mobResults.root) || foundPairs.length > 0) {
+                document.getElementById('p3_SummaryBox').classList.remove('hidden');
+                document.getElementById('finalNoteClientName').innerText = name.toUpperCase();
+            }
+
+            document.getElementById('analyzer').classList.add('hidden');
+            document.getElementById('reportContainer').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const name = document.getElementById('p1_Name').innerText || 'Analysis';
+            const btn = document.getElementById('downloadBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = "Processing 3-Page Report...";
+            btn.disabled = true;
+
+            try {
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = 210;
+                const pdfHeight = 297;
+
+                const capture = async (id, isNew) => {
+                    const el = document.getElementById(id);
+                    if (isNew) pdf.addPage();
+                    const canvas = await html2canvas(el, { 
+                        scale: 3,
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        width: 210 * 3.7795275591,
+                        windowWidth: 210 * 3.7795275591
+                    });
+                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                };
+
+                await capture('pdfPage1', false);
+                await capture('pdfPage2', true);
+                await capture('pdfPage3', true);
+
+                pdf.save(`Numerology_Report_${name.replace(/\s+/g, '_')}.pdf`);
+            } catch (err) {
+                console.error("PDF Error:", err);
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
