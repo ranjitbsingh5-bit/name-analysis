@@ -51,7 +51,7 @@
                 width: 95vw;
                 height: auto;
                 min-height: 297mm;
-                padding: 15px; /* Reduced for mobile to prevent cut-offs */
+                padding: 15px; 
             }
             h1.header-title {
                 letter-spacing: 0.1em !important;
@@ -61,7 +61,6 @@
 
         .accent-border { border-top: 6px solid var(--brand-blue); }
         
-        /* Forces phone numbers to appear as regular text (no underline) */
         a[href^="tel"], .no-detect {
             text-decoration: none !important;
             color: inherit !important;
@@ -95,8 +94,8 @@
         
         .alignment-note {
             width: 100%;
-            margin-top: 25px;
-            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-bottom: 15px;
             font-size: 18px;
             font-weight: 800;
             line-height: 1.6;
@@ -118,12 +117,12 @@
         .comp-neutral-text { color: #374151; }
 
         .final-note-box {
-            margin-top: 30px;
-            padding: 35px;
+            margin-top: 20px;
+            padding: 20px 30px;
             background: #ffffff;
             color: #000000;
             border: 2px solid #f1f5f9;
-            border-radius: 20px;
+            border-radius: 16px;
         }
 
         .hero-gradient {
@@ -140,10 +139,9 @@
             100% { transform: scale(1); }
         }
         
-        /* Pushes footer to bottom and darkens font */
         .report-footer {
             border-top: 1px solid #e2e8f0;
-            padding-top: 1.2rem;
+            padding-top: 1rem;
             margin-top: auto; 
             display: flex;
             justify-content: space-between;
@@ -228,7 +226,6 @@
             </div>
             
             <div class="flex flex-col items-center border-t border-slate-100 pt-10">
-                <!-- Price Box -->
                 <div class="w-full max-w-sm bg-amber-50 border-2 border-amber-100 rounded-3xl p-6 text-center shadow-sm mb-6">
                     <p class="text-[10px] font-black uppercase text-amber-600 tracking-[0.2em] mb-2">Exclusive Offer</p>
                     <div class="flex items-center justify-center gap-4">
@@ -238,12 +235,10 @@
                     <p class="text-xs font-bold text-emerald-600 mt-2">Get your 4-page comprehensive report</p>
                 </div>
                 
-                <!-- Bonus Tag Positioned Between Price and Button -->
                 <div class="bonus-badge mb-8">
                     mobile analysis report included
                 </div>
 
-                <!-- Pay Button -->
                 <button onclick="initiatePaymentProcess()" id="generateBtn" class="w-full max-w-md bg-blue-600 hover:bg-blue-700 text-white font-black text-xl px-10 py-6 rounded-2xl transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-4 payment-pulse">
                     Get Report Now
                 </button>
@@ -252,7 +247,7 @@
 
         <div id="reportContainer" class="hidden space-y-12 pb-20 no-print">
             
-            <!-- PAGE 1: VIBRATIONAL BIRTH IDENTITY -->
+            <!-- PAGE 1 -->
             <div id="pdfPage1" class="pdf-page accent-border">
                 <div class="flex-none">
                     <div class="text-center border-b-2 border-slate-100 pb-8 mb-8">
@@ -318,7 +313,7 @@
                 </div>
             </div>
 
-            <!-- PAGE 2: FIRST NAME DYNAMICS -->
+            <!-- PAGE 2 -->
             <div id="pdfPage2" class="pdf-page accent-border">
                 <div class="flex-none">
                     <div class="text-center border-b-2 border-slate-100 pb-8 mb-8">
@@ -355,7 +350,7 @@
                 </div>
             </div>
 
-            <!-- PAGE 3: FULL NAME SYNTHESIS -->
+            <!-- PAGE 3 -->
             <div id="pdfPage3" class="pdf-page accent-border">
                 <div class="flex-none">
                     <div class="text-center border-b-2 border-slate-100 pb-8 mb-8">
@@ -392,48 +387,49 @@
                 </div>
             </div>
 
-            <!-- PAGE 4: MOBILE & FINAL SYNTHESIS -->
+            <!-- PAGE 4 -->
             <div id="pdfPage4" class="pdf-page accent-border">
                 <div class="flex-none">
-                    <div class="text-center border-b-2 border-slate-100 pb-8 mb-8">
+                    <div class="text-center border-b-2 border-slate-100 pb-8 mb-6">
                         <h1 class="header-title text-3xl font-black text-blue-900 tracking-[0.2em] serif uppercase">Nexus Numerrology</h1>
                     </div>
                 </div>
-                <div>
-                    <div class="space-y-8">
+                <div class="space-y-6">
+                    <div class="space-y-4">
                         <h3 class="text-sm font-black text-amber-600 uppercase tracking-[0.3em]">Mobile Vibration Analysis</h3>
-                        <div class="bg-slate-50/50 p-12 rounded-3xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-8">
+                        <div class="bg-slate-50/50 p-8 rounded-3xl border border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-6">
                             <div class="text-left flex-1">
-                                <span class="text-[14px] text-slate-400 font-black uppercase tracking-widest block mb-2">Mobile Number</span>
-                                <div id="p4_MobNum" class="text-4xl font-black text-slate-900 tracking-tight no-detect"></div>
-                                <div id="p4_MobPairs" class="mt-4 text-base font-black text-rose-600"></div>
+                                <span class="text-[12px] text-slate-400 font-black uppercase tracking-widest block mb-1">Mobile Number</span>
+                                <div id="p4_MobNum" class="text-3xl font-black text-slate-900 tracking-tight no-detect"></div>
+                                <div id="p4_MobPairs" class="mt-2 text-sm font-black text-rose-600"></div>
                             </div>
                             <div class="text-right flex-1">
-                                <span class="text-[11px] text-slate-400 font-black uppercase tracking-widest block mb-2 text-right">Numerical Total</span>
+                                <span class="text-[11px] text-slate-400 font-black uppercase tracking-widest block mb-1 text-right">Numerical Total</span>
                                 <div class="flex justify-end items-center gap-3">
-                                    <span id="p4_MobTotal" class="number-display text-blue-700"></span>
-                                    <span id="p4_MobBadge" class="quality-note"></span>
+                                    <span id="p4_MobTotal" class="number-display text-3xl text-blue-700"></span>
+                                    <span id="p4_MobBadge" class="quality-note text-xs"></span>
                                 </div>
                             </div>
                         </div>
-                        <div id="p4_MobRec" class="p-10 rounded-3xl text-xl leading-relaxed shadow-sm text-center"></div>
+                        <div id="p4_MobRec" class="p-6 rounded-3xl text-lg leading-relaxed shadow-sm text-center"></div>
                     </div>
 
+                    <!-- Final Synthesis: RE-SIZED to be half original -->
                     <div id="p4_SummaryBox" class="hidden">
                         <div class="final-note-box shadow-sm border border-slate-100">
-                            <h4 class="text-xl font-black uppercase tracking-[0.2em] mb-6 text-blue-800 text-center">
+                            <h4 class="text-sm font-black uppercase tracking-[0.2em] mb-3 text-blue-800 text-center">
                                 Final Synthesis - <span id="finalNoteClientName"></span>
                             </h4>
-                            <p class="text-2xl font-medium text-slate-900 leading-relaxed text-center">
+                            <p class="text-sm font-medium text-slate-900 leading-relaxed text-center">
                                 Based on our ancient Chaldean vibrational assessment, your current configurations show **Malefic imbalances**. This misalignment often creates invisible barriers in career growth, health stability, and relationship harmony.
                             </p>
-                            <p class="text-lg font-bold text-blue-700 mt-10 uppercase tracking-widest italic text-center">Professional spell-correction is highly recommended.</p>
+                            <p class="text-[10px] font-bold text-blue-700 mt-4 uppercase tracking-widest italic text-center">Professional spell-correction is highly recommended.</p>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-100 mt-6 text-center mx-auto max-w-[85%]">
-                        <p class="text-[12px] font-bold text-slate-400 mb-2 tracking-widest uppercase text-center">For personalized corrections and deep consultations:</p>
-                        <p class="text-2xl font-black text-blue-900 tracking-tight text-center no-detect">+91 9953831912 / 9953129931</p>
+                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-100 text-center mx-auto max-w-[85%]">
+                        <p class="text-[11px] font-bold text-slate-400 mb-1 tracking-widest uppercase text-center">For personalized corrections and deep consultations:</p>
+                        <p class="text-xl font-black text-blue-900 tracking-tight text-center no-detect">+91 9953831912 / 9953129931</p>
                     </div>
                 </div>
                 <div class="report-footer">
@@ -452,8 +448,7 @@
     </div>
 
     <script>
-        // --- LIVE MODE: PAYMENTS ENABLED ---
-        const TEST_MODE = false; 
+        const TEST_MODE = true; 
         const PAYMENT_LINK = "https://rzp.io/rzp/pDSCrbdU";
 
         const CHALDEAN_MAP = {'A':1,'I':1,'J':1,'Q':1,'Y':1,'B':2,'K':2,'R':2,'C':3,'G':3,'L':3,'S':3,'D':4,'M':4,'T':4,'E':5,'H':5,'N':5,'X':5,'U':6,'V':6,'W':6,'O':7,'Z':7,'F':8,'P':8};
@@ -505,7 +500,6 @@
             const fullResults = calculateValue(name);
             const mobResults = calculateMobileValue(phone);
 
-            // Populate Page 1
             document.getElementById('p1_Name').innerText = name.toUpperCase();
             document.getElementById('p1_DOB').innerText = "Birth Vibration: " + dob;
             document.getElementById('p1_Date').innerText = new Date().toLocaleDateString('en-IN');
@@ -554,7 +548,6 @@
                 else { el.innerText = "Unfavorable"; el.classList.add('comp-bad-text'); }
             };
 
-            // Page 2
             document.getElementById('p2_FirstComp').innerText = firstResults.compound;
             setQ('p2_FirstQual', firstResults.compound);
             document.getElementById('p2_FirstRoot').innerText = firstResults.root;
@@ -562,7 +555,6 @@
             document.getElementById('p2_FirstInterp').innerText = INTERPRETATIONS[firstResults.root];
             setUI('p2_FirstAlign', firstResults.root, "First Name is");
 
-            // Page 3 (Full Name)
             document.getElementById('p3_FullComp').innerText = fullResults.compound;
             setQ('p3_FullQual', fullResults.compound);
             document.getElementById('p3_FullRoot').innerText = fullResults.root;
@@ -570,7 +562,6 @@
             document.getElementById('p3_FullInterp').innerText = INTERPRETATIONS[fullResults.root];
             setUI('p3_FullAlign', fullResults.root, "Full Name is");
 
-            // Page 4 (Mobile)
             document.getElementById('p4_MobNum').innerText = phone;
             document.getElementById('p4_MobTotal').innerText = mobResults.root;
             let cleanedPhone = phone.replace(/0/g, '');
@@ -594,10 +585,10 @@
             const recEl = document.getElementById('p4_MobRec');
             if (mobS === 'Lucky' && foundPairs.length === 0) {
                 recEl.innerHTML = "<span class='aligned-text font-bold text-2xl text-center block'>Your mobile vibration is currently favorable and supportive.</span>";
-                recEl.className = "p-10 rounded-3xl text-lg bg-emerald-50 text-center shadow-sm";
+                recEl.className = "p-6 rounded-3xl text-lg bg-emerald-50 text-center shadow-sm";
             } else {
                 recEl.innerHTML = `<strong>Recommendation:</strong> Your mobile configuration has ${foundPairs.length > 0 ? 'malefic pairs' : mobS.toLowerCase() + ' vibrations'}. Transition to a number totaling to: <span class="text-blue-700 font-black">${luckyB.length > 0 ? luckyB.join(', ') : '1, 3, 5, or 6'}</span>.`;
-                recEl.className = "p-10 rounded-3xl text-lg bg-slate-50 border border-slate-100";
+                recEl.className = "p-6 rounded-3xl text-lg bg-slate-50 border border-slate-100";
             }
 
             if (getNameStatus(firstResults.root) !== 'Lucky' || getNameStatus(fullResults.root) !== 'Lucky') {
@@ -635,8 +626,6 @@
                     const pdfWidth = 210, contentWidth = 190; 
                     const imgHeight = (canvas.height * contentWidth) / canvas.width;
                     const xOffset = (pdfWidth - contentWidth) / 2;
-                    
-                    // Fixed top margin to prevent bottom cutting
                     pdf.addImage(imgData, 'JPEG', xOffset, 5, contentWidth, imgHeight);
                 };
                 await capture('pdfPage1', false); 
